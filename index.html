@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Finding Made Easy</title>
+  <meta name="description" content="Discover movies and series effortlessly with Movie Finding Made Easy." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <a href="index.html">
+      <img src="images/logo.png" alt="Site Logo" class="logo" />
+    </a>
+    <button id="menu-toggle">☰</button>
+    <nav>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <h1>Movie Finding Made Easy</h1>
+      <p id="greeting"></p>
+      <p>Skip the scroll. Start the show.</p>
+      <form id="search-form">
+        <input type="text" placeholder="Search for a movie or series..." />
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <!-- Featured Section -->
+    <section class="featured">
+      <h2>Featured Picks</h2>
+      <div class="movie-grid">
+        <div class="movie-card">
+          <img src="images/movie1.jpg" alt="Movie 1" />
+          <h3>Inception</h3>
+          <p>Mind-bending thriller by Christopher Nolan.</p>
+        </div>
+        <div class="movie-card">
+          <img src="images/movie2.jpg" alt="Movie 2" />
+          <h3>Stranger Things</h3>
+          <p>Supernatural mystery meets 80s nostalgia.</p>
+        </div>
+        <div class="movie-card">
+          <img src="images/movie3.jpg" alt="Movie 3" />
+          <h3>Black Panther</h3>
+          <p>A Marvel masterpiece celebrating Wakanda.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Movie Finding Made Easy</p>
+    <p>Created by Sidney Mpenyana</p>
+    <div class="social-links">
+      <a href="#">Facebook</a> |
+      <a href="#">Twitter</a> |
+      <a href="#">GitHub</a>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-Top Button -->
+  <button id="scrollTopBtn">↑</button>
+
+  <!-- JavaScript -->
+  <script src="js/script.js"></script>
+</body>
+</html>
