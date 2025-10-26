@@ -37,3 +37,28 @@ if (greeting) {
     greeting.textContent = 'Good evening, welcome to Movie Finding Made Easy!';
   }
 }
+
+// === Initialize Bootstrap Tooltips ===
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+
+// === Scroll Animation for Movie Cards ===
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('fade-in');
+    }
+  });
+}, observerOptions);
+
+const movieCards = document.querySelectorAll('.movie-card');
+movieCards.forEach(card => {
+  observer.observe(card);
+});
