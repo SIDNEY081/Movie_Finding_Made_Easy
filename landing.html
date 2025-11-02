@@ -1,26 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Finding Made Easy — Welcome</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="landing-body">
+  
+  <!-- Loading screen -->
+  <div id="loadingScreen" class="video-loading">
+    <div class="spinner"></div>
+  </div>
 
   <!-- Background Video -->
   <video autoplay muted loop playsinline id="bgVideo" class="bg-video">
-    <source src="images/hero-bg.mp4" type="video/mp4">
+    <source src="images/trailer.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
 
-  <!-- Overlay Content -->
-  <div class="overlay">
-    <div class="landing-content">
-      <h1 class="landing-title">🎬 Movie Finding Made Easy</h1>
-      <p class="landing-subtitle">Discover, explore, and enjoy your favorite movies instantly.</p>
-      <a href="index.html" class="enter-btn">Get Started ▶</a>
-    </div>
+  <!-- Dark Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Sound Toggle Button -->
+  <button id="soundToggle" class="sound-toggle" aria-label="Toggle sound">
+    <span class="sound-icon">🔇</span>
+  </button>
+
+  <!-- Main Content -->
+  <div class="landing-content">
+    <h1 class="landing-title">🎬 Movie Finding Made Easy</h1>
+    <p class="landing-subtitle">Discover, explore, and enjoy your favorite movies instantly with our powerful search and recommendation engine.</p>
+    <a href="index.php" class="enter-btn">Get Started ▶</a>
   </div>
 
   <!-- Footer -->
@@ -28,5 +39,6 @@
     © 2025 Movie Finding Made Easy | Powered by HTML • CSS • JS • PHP
   </footer>
 
+  <script src="js/script.js"></script>
 </body>
 </html>

@@ -15,6 +15,16 @@ if (!empty($searchQuery)) {
         return stripos($movie['title'], $searchQuery) !== false;
     });
 }
+
+// Dynamic greeting
+$hour = date('H');
+if ($hour < 12) {
+    $greeting = 'Good morning, welcome to Movie Finding Made Easy!';
+} elseif ($hour < 18) {
+    $greeting = 'Good afternoon, welcome to Movie Finding Made Easy!';
+} else {
+    $greeting = 'Good evening, welcome to Movie Finding Made Easy!';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,17 +33,19 @@ if (!empty($searchQuery)) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Movie Finding Made Easy</title>
   <meta name="description" content="Discover movies and series effortlessly with Movie Finding Made Easy." />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 <body>
+  
+  <!-- Header -->
   <header>
     <a href="index.php">
       <img src="images/logo.png" alt="Site Logo" class="logo" />
     </a>
-    <button id="menu-toggle">☰</button>
+    <button id="menu-toggle" aria-label="Toggle navigation">☰</button>
     <nav>
       <ul class="nav-menu">
         <li><a href="index.php" class="active">Home</a></li>
@@ -44,10 +56,13 @@ if (!empty($searchQuery)) {
   </header>
 
   <main>
+
+    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-overlay">
         <h1>Movie Finding Made Easy</h1>
         <p>Skip the scroll. Start the show.</p>
+        <div id="greeting" class="greeting-message"><?php echo $greeting; ?></div>
         <form id="search-form" method="GET" action="">
           <input type="text" name="search" placeholder="Search for a movie or series..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
           <button type="submit">Search</button>
@@ -55,49 +70,102 @@ if (!empty($searchQuery)) {
       </div>
     </section>
 
+    <!-- Featured Movies Section -->
     <section class="featured">
-      <h2>Featured Picks</h2>
-      <div class="movie-grid">
-        <?php if (!empty($filteredMovies)): ?>
-          <?php foreach ($filteredMovies as $movie): ?>
-            <a href="<?php echo htmlspecialchars($movie['link']); ?>" target="_blank" class="movie-card">
-              <img src="<?php echo htmlspecialchars($movie['image']); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>">
-              <h3><?php echo htmlspecialchars($movie['title']); ?></h3>
-              <div class="meta">
-                <span class="duration-year">
-                  <?php echo htmlspecialchars($movie['year']); ?> • <?php echo htmlspecialchars($movie['duration']); ?>
-                </span>
-                <div class="rating">
-                  <span class="star">★</span>
-                  <span class="avg"><?php echo htmlspecialchars($movie['rating']); ?></span>
+      <div class="container">
+        <h2>Featured Picks</h2>
+        <div class="movie-grid">
+          <?php if (!empty($filteredMovies)): ?>
+            <?php foreach ($filteredMovies as $movie): ?>
+              <a href="<?php echo htmlspecialchars($movie['link']); ?>" target="_blank" class="movie-card" data-aos="fade-up">
+                <img src="<?php echo htmlspecialchars($movie['image']); ?>" alt="<?php echo htmlspecialchars($movie['title']); ?>" loading="lazy">
+                <h3><?php echo htmlspecialchars($movie['title']); ?></h3>
+                <div class="meta">
+                  <span class="duration-year">
+                    <?php echo htmlspecialchars($movie['year']); ?> • <?php echo htmlspecialchars($movie['duration']); ?>
+                  </span>
+                  <div class="rating">
+                    <span class="star">★</span>
+                    <span class="avg"><?php echo htmlspecialchars($movie['rating']); ?></span>
+                  </div>
                 </div>
-              </div>
-            </a>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <?php if (!empty($searchQuery)): ?>
-            <p style="text-align:center; color:#ccc;">No movies found matching "<?php echo htmlspecialchars($searchQuery); ?>".</p>
+              </a>
+            <?php endforeach; ?>
           <?php else: ?>
-            <p style="text-align:center; color:#ccc;">No movies found. Please check your JSON file.</p>
+            <?php if (!empty($searchQuery)): ?>
+              <div class="no-results">
+                <p>No movies found matching "<?php echo htmlspecialchars($searchQuery); ?>".</p>
+                <a href="index.php" class="btn-primary">View All Movies</a>
+              </div>
+            <?php else: ?>
+              <div class="no-results">
+                <p>No movies found. Please check your JSON file.</p>
+              </div>
+            <?php endif; ?>
           <?php endif; ?>
-        <?php endif; ?>
+        </div>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Movie Finding Made Easy</p>
-    <p>Created by MFME Team</p>
-    <div class="social-links">
-      <a href="#">Facebook</a> |
-      <a href="#">Twitter</a> |
-      <a href="#">GitHub</a>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Movie Finding Made Easy</h3>
+          <p>Your ultimate destination for discovering great movies and series.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.php">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <p>Email: info@mfme.com</p>
+          <p>Phone: +27 81 056 5675</p>
+          <p>Address: 123 Movie Lane, Johannesburg, South Africa</p>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+
+          <div class="social-links" aria-label="Social links">
+
+
+        <a href="https://facebook.com" target="_blank" rel="https://facebook.com">Facebook</a> |
+        <a href="https://twitter.com" target="_blank" rel="https://twitter.com">Twitter</a> |
+        <a href="https://github.com" target="_blank" rel="https://github.com/SIDNEY081/Movie_Finding_Made_Easy">GitHub</a>
+      
+
+      </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Movie Finding Made Easy. All rights reserved.</p>
+        <p>Created by MFME Team | VUT Web Development 3.2 Final Project</p>
+      </div>
     </div>
   </footer>
 
-  <button id="scrollTopBtn">↑</button>
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="js/script.js"></script>
+  <script>
+
+
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+  </script>
 </body>
 </html>

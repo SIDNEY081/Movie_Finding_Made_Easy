@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Movie Finding Made Easy</title>
   <meta name="description" content="Learn more about Movie Finding Made Easy - Discover movies effortlessly." />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 </head>
 <body>
+
+
+  <!-- Header -->
   <header>
     <a href="index.php">
       <img src="images/logo.png" alt="Site Logo" class="logo" />
     </a>
-    <button id="menu-toggle">☰</button>
+    <button id="menu-toggle" aria-label="Toggle navigation">☰</button>
     <nav>
       <ul class="nav-menu">
         <li><a href="index.php">Home</a></li>
@@ -26,56 +29,211 @@
   </header>
 
   <main>
+    
+    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-overlay">
-        <h1>About Movie Finding Made Easy</h1>
-        <p>Discover the story behind our mission to make movie discovery effortless.</p>
+        <h1>About <span>MFME</span></h1>
+        <p>
+          Movie Finding Made Easy is your ultimate destination for discovering movies and series. 
+          We're passionate about helping you find exactly what you want to watch, when you want to watch it.
+        </p>
       </div>
     </section>
 
+    <!-- Mission Section -->
     <section class="about-content">
       <div class="container">
-        <div class="about-section">
+        <div class="mission-card">
           <h2>Our Mission</h2>
-          <p><strong>Movie Finding Made Easy</strong> is your easy and fast way to discover, explore, and enjoy your favorite movies. We aim to make movie searching simple and fun by offering a clean, responsive interface where users can find information about movies, genres, ratings, and links to external resources like IMDb or YouTube trailers.</p>
+          <p>
+            In a world overflowing with content, finding the perfect movie can be overwhelming. 
+            That's why we created MFME - to cut through the noise and help you discover films 
+            that match your taste. Whether you're looking for a classic masterpiece, the latest 
+            blockbuster, or a hidden gem, we've got you covered.
+          </p>
         </div>
 
-        <div class="about-section">
-          <h2>Technologies Used</h2>
-          <ul>
-            <li>HTML5 for structure and semantic layout</li>
-            <li>CSS3 for responsive and modern design</li>
-            <li>JavaScript for interactivity (search, filters, modals)</li>
-            <li>PHP for backend processing and dynamic content</li>
-          </ul>
+        <!-- Features Grid -->
+        <div>
+          <h2>What We Offer</h2>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🔍</div>
+              <h3>Easy Discovery</h3>
+              <p>Find your next favorite movie with our powerful search and filtering system.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">⭐</div>
+              <h3>Curated Ratings</h3>
+              <p>See ratings and reviews to make informed decisions about what to watch.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">🎬</div>
+              <h3>Vast Collection</h3>
+              <p>Browse through thousands of movies and series from various genres.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">👥</div>
+              <h3>Community Driven</h3>
+              <p>Built by movie lovers, for movie lovers. Join our growing community.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">🏆</div>
+              <h3>Quality Content</h3>
+              <p>Only the best films and series, carefully selected and organized.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">⚡</div>
+              <h3>Lightning Fast</h3>
+              <p>Instant search results and smooth browsing experience.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">🛡️</div>
+              <h3>Safe & Secure</h3>
+              <p>Your data is protected and we respect your privacy.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon">❤️</div>
+              <h3>Made with Love</h3>
+              <p>Crafted with passion by movie enthusiasts for the community.</p>
+            </div>
+          </div>
         </div>
 
-        <div class="about-section">
-          <h2>Design Philosophy</h2>
-          <p>This site uses a <strong>dark, cinematic theme</strong> inspired by the atmosphere of movie theatres — combining clarity, contrast, and accessibility. Typography follows a clear hierarchy using semantic HTML tags to meet web accessibility standards.</p>
+        <!-- Technology Section -->
+        <div class="tech-card">
+          <h2>Built with Modern Technology</h2>
+          <p>
+            MFME is built using cutting-edge web technologies to ensure a fast, 
+            reliable, and beautiful experience. Our platform is designed to be 
+            responsive, accessible, and user-friendly across all devices.
+          </p>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <p>HTML5</p>
+            </div>
+            <div class="tech-item">
+              <p>CSS3</p>
+            </div>
+            <div class="tech-item">
+              <p>JavaScript</p>
+            </div>
+            <div class="tech-item">
+              <p>PHP</p>
+            </div>
+            <div class="tech-item">
+              <p>Bootstrap</p>
+            </div>
+          </div>
         </div>
 
-        <div class="about-section">
-          <h2>Developer</h2>
-          <p>Developed  as part of the <em>Information Technology Diploma (Web Management 3.2)</em> at VUT. This website was created as part of the <em>Web Development 3.2 Final Project</em> and demonstrates practical skills in HTML, CSS, JavaScript, and PHP.</p>
+        <!-- Team Section -->
+        <div class="team-card">
+          <h2>The Team</h2>
+          <p>
+            MFME was created by a passionate team of movie enthusiasts and developers at the 
+            Vaal University of Technology. Our goal is to make movie discovery simple, 
+            enjoyable, and accessible to everyone.
+          </p>
+
+          <!-- Team Members Grid with Images -->
+
+          
+              <div class="team-grid">
+              <div class="team-member-card">
+              <img src="images/team/sidney.png" alt="Sidney Mpenyana" class="team-member-img">
+              <div class="team-member-name">Sidney Mpenyana</div>
+              <div class="team-member-role">Lead Developer</div>
+              </div>
+            
+              <div class="team-member-card">
+              <img src="images/team/pretty.png" alt="Vumboni Pretty Machave" class="team-member-img">
+              <div class="team-member-name">Vumboni Pretty Machave</div>
+              <div class="team-member-role">UI/UX Designer & Content </div>
+              </div>
+            
+              <div class="team-member-card">
+              <img src="images/team/sbongile.png" alt="Sibongile Gwendoline Rakobela" class="team-member-img">
+              <div class="team-member-name">Sibongile Gwendoline Rakobela</div>
+              <div class="team-member-role">Content Manager & Reporter</div>
+            </div>
+            
+            <div class="team-member-card">
+              <img src="images/team/jeff.png" alt="Jeff Adivhaho Nengovhela" class="team-member-img">
+              <div class="team-member-name">Jeff Adivhaho Nengovhela</div>
+              <div class="team-member-role">Backend Developer</div>
+            </div>
+            
+            <div class="team-member-card">
+              <img src="images/team/phumzile.png" alt="Phumzile Chauke" class="team-member-img">
+              <div class="team-member-name">Phumzile Chauke</div>
+              <div class="team-member-role">Frontend Developer </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Movie Finding Made Easy</p>
-    <p>Created by MFME Team</p>
-    <div class="social-links">
-      <a href="#">Facebook</a> |
-      <a href="#">Twitter</a> |
-      <a href="#">GitHub</a>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Movie Finding Made Easy</h3>
+          <p>Your ultimate destination for discovering great movies and series.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.php">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact Info</h4>
+          <p>Email: info@mfme.com</p>
+          <p>Phone: +27 81 056 5675</p>
+          <p>Address: 123 Movie Lane, Johannesburg, South Africa</p>
+        </div>
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a> |
+            <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a> |
+            <a href="https://github.com/SIDNEY081/Movie_Finding_Made_Easy" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Movie Finding Made Easy. All rights reserved.</p>
+        <p>Created by MFME Team | VUT Web Development 3.2 Final Project</p>
+      </div>
     </div>
   </footer>
 
-  <button id="scrollTopBtn">↑</button>
+  <!-- Scroll to Top Button -->
+  <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="js/script.js"></script>
+  <script>
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      once: true,
+      offset: 100
+    });
+  </script>
 </body>
 </html>
