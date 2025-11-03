@@ -44,15 +44,27 @@ if (!empty($searchQuery) && !empty($movies)) {
     });
 }
 
-// Dynamic greeting
+// Dynamic greeting message
 $hour = date('H');
-if ($hour < 12) {
-    $greeting = 'Good morning, welcome to Movie Finding Made Easy!';
-} elseif ($hour < 18) {
-    $greeting = 'Good afternoon, welcome to Movie Finding Made Easy!';
-} else {
-    $greeting = 'Good evening, welcome to Movie Finding Made Easy!';
+$greetings = [
+    12 => 'morning',
+    18 => 'afternoon',
+    24 => 'evening'
+    
+];
+
+
+// Find the first time block that $hour is LESS than, and get its greeting
+$time_of_day = 'evening'; // Default
+foreach ($greetings as $limit => $g) {
+    if ($hour < $limit) {
+        $time_of_day = $g;
+        break;
+    }
 }
+
+$greeting = "Good $time_of_day, welcome to Movie Finding Made Easy!";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
