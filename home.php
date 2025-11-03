@@ -20,7 +20,7 @@ if (!isset($_SESSION['landing_seen'])) {
 // Check if admin is logged in (to bypass landing in future)
 $isAdmin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'];
 
-// The rest of your existing index.php code continues below...
+// Movie data 
 $movies = [];
 $jsonFile = 'movies.json';
 

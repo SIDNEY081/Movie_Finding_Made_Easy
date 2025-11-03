@@ -6,9 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    // Simple authentication (replace with secure database authentication)
+    //  authentication 
     $admin_username = 'admin';
-    $admin_password = 'password123'; // In real app, use hashed passwords
+    $admin_password = 'password123'; 
     
     if ($username === $admin_username && $password === $admin_password) {
         $_SESSION['admin_logged_in'] = true;
