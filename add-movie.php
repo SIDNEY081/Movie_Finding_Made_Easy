@@ -8,6 +8,14 @@ if (!isset($_SESSION['admin_logged_in']) || !$_SESSION['admin_logged_in']) {
 $error = '';
 $success = '';
 
+// Predefined list of movie genres
+$allGenres = [
+    'Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 
+    'Documentary', 'Drama', 'Fantasy', 'Horror', 'Mystery', 
+    'Romance', 'Sci-Fi', 'Thriller', 'Western', 'Family',
+    'Musical', 'War', 'Biography', 'History', 'Sport'
+];
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = trim($_POST['title'] ?? '');
@@ -16,9 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rating = trim($_POST['rating'] ?? '');
     $image = trim($_POST['image'] ?? '');
     $link = trim($_POST['link'] ?? '');
+    $genre = trim($_POST['genre'] ?? '');
     
     // Basic validation
-    if (empty($title) || empty($year) || empty($duration) || empty($rating) || empty($image) || empty($link)) {
+    if (empty($title) || empty($year) || empty($duration) || empty($rating) || empty($image) || empty($link) || empty($genre)) {
         $error = 'All fields are required!';
     } elseif (!is_numeric($year) || $year < 1900 || $year > date('Y') + 5) {
         $error = 'Please enter a valid year (1900 - ' . (date('Y') + 5) . ')';
@@ -41,7 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'duration' => $duration,
             'rating' => $rating,
             'image' => $image,
-            'link' => $link
+            'link' => $link,
+            'genre' => $genre
         ];
         
         $movies[] = $newMovie;
@@ -112,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="duration">Duration *</label>
                     <input type="text" id="duration" name="duration" required 
                            value="<?php echo htmlspecialchars($_POST['duration'] ?? ''); ?>" 
-                           placeholder="e.g., 2h 15min">
+                           placeholder="e.g., 2h 15min or 120min">
                 </div>
                 
                 <div class="form-group">
@@ -120,6 +130,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="number" id="rating" name="rating" required 
                            value="<?php echo htmlspecialchars($_POST['rating'] ?? ''); ?>" 
                            placeholder="e.g., 8.5" step="0.1" min="0" max="10">
+                </div>
+                
+                <div class="form-group">
+                    <label for="genre">Genre * (Enter one or more genres separated by commas)</label>
+                    <input type="text" id="genre" name="genre" required 
+                           value="<?php echo htmlspecialchars($_POST['genre'] ?? ''); ?>" 
+                           placeholder="e.g., Action, Adventure, Sci-Fi">
+                    <div class="genre-hint">
+                        <p><strong>Common genre combinations:</strong> Action,Adventure • Comedy,Romance • Horror,Thriller • Drama,Romance</p>
+                    </div>
                 </div>
                 
                 <div class="form-group">

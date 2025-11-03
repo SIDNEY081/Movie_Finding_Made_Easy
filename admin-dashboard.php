@@ -222,6 +222,9 @@ $add_success = $_GET['success'] ?? '';
         </div>
     </main>
 
+
+  <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
+
     <script src="js/script.js"></script>
 </body>
 </html>

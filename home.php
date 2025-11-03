@@ -1,3 +1,5 @@
+[file name]: home.php
+[file content begin]
 <?php
 // Enable full error reporting
 error_reporting(E_ALL);
@@ -36,11 +38,36 @@ if (file_exists($jsonFile)) {
 }
 
 $searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
+$selectedGenre = isset($_GET['genre']) ? trim($_GET['genre']) : '';
 $filteredMovies = $movies;
 
-if (!empty($searchQuery) && !empty($movies)) {
-    $filteredMovies = array_filter($movies, function($movie) use ($searchQuery) {
-        return stripos($movie['title'], $searchQuery) !== false;
+// Predefined list of movie genres
+$allGenres = [
+    'Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 
+    'Documentary', 'Drama', 'Fantasy', 'Horror', 'Mystery', 
+    'Romance', 'Sci-Fi', 'Thriller', 'Western', 'Family',
+    'Musical', 'War', 'Biography', 'History', 'Sport'
+];
+
+// Filter movies based on search and genre
+if ((!empty($searchQuery) || !empty($selectedGenre)) && !empty($movies)) {
+    $filteredMovies = array_filter($movies, function($movie) use ($searchQuery, $selectedGenre) {
+        $matchesSearch = true;
+        $matchesGenre = true;
+        
+        if (!empty($searchQuery)) {
+            $matchesSearch = stripos($movie['title'], $searchQuery) !== false;
+        }
+        
+        if (!empty($selectedGenre)) {
+            $matchesGenre = false;
+            if (isset($movie['genre']) && !empty($movie['genre'])) {
+                $movieGenres = array_map('trim', explode(',', $movie['genre']));
+                $matchesGenre = in_array($selectedGenre, $movieGenres);
+            }
+        }
+        
+        return $matchesSearch && $matchesGenre;
     });
 }
 
@@ -52,7 +79,6 @@ $greetings = [
     24 => 'evening'
     
 ];
-
 
 // Find the first time block that $hour is LESS than, and get its greeting
 $time_of_day = 'evening'; // Default
@@ -109,8 +135,18 @@ $greeting = "Good $time_of_day, welcome to Movie Finding Made Easy!";
         <p>Skip the scroll. Start the show.</p>
         <div id="greeting" class="greeting-message"><?php echo $greeting; ?></div>
         <form id="search-form" method="GET" action="">
-          <input type="text" name="search" placeholder="Search for a movie or series..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
-          <button type="submit">Search</button>
+          <div class="search-filters">
+            <input type="text" name="search" placeholder="Search for a movie or series..." value="<?php echo htmlspecialchars($searchQuery); ?>" />
+            <select name="genre" class="genre-filter" id="genre-filter">
+              <option value="">All Genres</option>
+              <?php foreach ($allGenres as $genre): ?>
+                <option value="<?php echo htmlspecialchars($genre); ?>" <?php echo $selectedGenre === $genre ? 'selected' : ''; ?>>
+                  <?php echo htmlspecialchars($genre); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+            <button type="submit">Search</button>
+          </div>
         </form>
       </div>
     </section>
@@ -119,6 +155,12 @@ $greeting = "Good $time_of_day, welcome to Movie Finding Made Easy!";
     <section class="featured">
       <div class="container">
         <h2>Featured Picks</h2>
+        <?php if (!empty($selectedGenre)): ?>
+          <div class="filter-info">
+            <p>Showing results for genre: <strong><?php echo htmlspecialchars($selectedGenre); ?></strong></p>
+            <a href="home.php" class="clear-filter">Clear Filter</a>
+          </div>
+        <?php endif; ?>
         <div class="movie-grid">
           <?php if (!empty($filteredMovies)): ?>
             <?php foreach ($filteredMovies as $movie): ?>
@@ -134,12 +176,32 @@ $greeting = "Good $time_of_day, welcome to Movie Finding Made Easy!";
                     <span class="avg"><?php echo htmlspecialchars($movie['rating']); ?></span>
                   </div>
                 </div>
+                <?php if (isset($movie['genre']) && !empty($movie['genre'])): ?>
+                  <div class="genre-tags">
+                    <?php 
+                    $genres = explode(',', $movie['genre']);
+                    $displayGenres = array_slice($genres, 0, 2); // Show only first 2 genres
+                    foreach ($displayGenres as $genre): 
+                    ?>
+                      <span class="genre-tag"><?php echo htmlspecialchars(trim($genre)); ?></span>
+                    <?php endforeach; ?>
+                    <?php if (count($genres) > 2): ?>
+                      <span class="genre-tag">+<?php echo count($genres) - 2; ?> more</span>
+                    <?php endif; ?>
+                  </div>
+                <?php endif; ?>
               </a>
             <?php endforeach; ?>
           <?php else: ?>
-            <?php if (!empty($searchQuery)): ?>
+            <?php if (!empty($searchQuery) || !empty($selectedGenre)): ?>
               <div class="no-results">
-                <p>No movies found matching "<?php echo htmlspecialchars($searchQuery); ?>".</p>
+                <p>No movies found matching your criteria.</p>
+                <?php if (!empty($searchQuery)): ?>
+                  <p>Search: "<?php echo htmlspecialchars($searchQuery); ?>"</p>
+                <?php endif; ?>
+                <?php if (!empty($selectedGenre)): ?>
+                  <p>Genre: "<?php echo htmlspecialchars($selectedGenre); ?>"</p>
+                <?php endif; ?>
                 <a href="home.php" class="btn-primary">View All Movies</a>
               </div>
             <?php else: ?>
@@ -204,6 +266,11 @@ $greeting = "Good $time_of_day, welcome to Movie Finding Made Easy!";
       duration: 800,
       once: true,
       offset: 100
+    });
+
+    // Auto-submit form when genre is selected
+    document.getElementById('genre-filter').addEventListener('change', function() {
+      document.getElementById('search-form').submit();
     });
   </script>
 </body>
