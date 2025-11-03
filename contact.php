@@ -208,7 +208,7 @@ if ($hour < 12) {
         <div class="footer-section">
           <h4>Contact Info</h4>
           <p>Email: info@mfme.com</p>
-          <p>Phone: +27 81 056 5675/p>
+          <p>Phone: +27 81 056 5675</p>
           <p>Address: 123 Movie Lane, Johannesburg, South Africa</p>
         </div>
         <div class="footer-section">
