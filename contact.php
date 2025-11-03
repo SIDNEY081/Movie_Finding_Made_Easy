@@ -157,7 +157,7 @@ if ($hour < 12) {
               <div class="contact-icon">📞</div>
               <div class="contact-text">
                 <h4>Phone</h4>
-                <a href="tel:+27712345678">+27 81 056 5675/a>
+                <a href="tel:+27712345678">+27 81 056 5675</a>
               </div>
             </div>
             <div class="contact-item">
