@@ -70,13 +70,13 @@ if ($hour < 12) {
 
   <!-- Header -->
   <header>
-    <a href="index.php">
+    <a href="home.php">
       <img src="images/logo.png" alt="Site Logo" class="logo" />
     </a>
     <button id="menu-toggle" aria-label="Toggle navigation">☰</button>
     <nav>
       <ul class="nav-menu">
-        <li><a href="index.php">Home</a></li>
+        <li><a href="home.php">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.php" class="active">Contact</a></li>
       </ul>
@@ -106,7 +106,7 @@ if ($hour < 12) {
             <div class="message-icon">✓</div>
             <h3>Thank You!</h3>
             <p>Your message has been sent successfully. We'll get back to you within 24 hours.</p>
-            <a href="index.php" class="btn-primary">Back to Home</a>
+            <a href="home.php" class="btn-primary">Back to Home</a>
           </div>
         <?php elseif (!empty($errorMessage)): ?>
           <div class="error-message" data-aos="fade-up">
