@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // === Image Loading Handling ===
     initializeImageLoading();
 
+    // === Landing Page Functionality ===
+    initializeLandingPage();
+
+    // === Admin Dashboard Functionality ===
+    initializeAdminDashboard();
+
     console.log('All features initialized successfully');
 });
 
@@ -332,7 +338,6 @@ function initializeImageLoading() {
 
         images.forEach(img => imageObserver.observe(img));
     }
-                                    🗑️ Delete
 
     // Handle broken images
     images.forEach(img => {
@@ -343,37 +348,7 @@ function initializeImageLoading() {
     });
 }
 
-// Utility function for debouncing
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Make functions available globally for debugging
-window.movieApp = {
-    refresh: function() {
-        location.reload();
-    },
-    testMenu: function() {
-        const menuToggle = document.getElementById('menu-toggle');
-        if (menuToggle) menuToggle.click();
-    },
-    testScroll: function() {
-        const scrollBtn = document.getElementById('scrollTopBtn');
-        if (scrollBtn) scrollBtn.click();
-    }
-};
-
-console.log('Movie Finding Made Easy - JavaScript loaded successfully');
-
-// ===== LANDING PAGE FUNCTIONALITY =====
+// Landing Page Functionality
 function initializeLandingPage() {
     const bgVideo = document.getElementById('bgVideo');
     const loadingScreen = document.getElementById('loadingScreen');
@@ -474,12 +449,7 @@ function initializeLandingPage() {
     });
 }
 
-// Initialize landing page if we're on that page
-document.addEventListener('DOMContentLoaded', function() {
-    initializeLandingPage();
-});
-
-// ===== ADMIN DASHBOARD FUNCTIONALITY =====
+// Admin Dashboard Functionality
 function initializeAdminDashboard() {
     // Toggle edit forms
     const toggleEditButtons = document.querySelectorAll('.toggle-edit');
@@ -506,21 +476,32 @@ function initializeAdminDashboard() {
     }
 }
 
-// Initialize admin dashboard if we're on that page
-document.addEventListener('DOMContentLoaded', function() {
-    // Check if we're on admin dashboard by looking for admin-header
-    const adminHeader = document.querySelector('.admin-header');
-    if (adminHeader) {
-        initializeAdminDashboard();
-    } else {
-        // Run regular site initializations
-        initializeMobileMenu();
-        initializeScrollToTop();
-        initializeSmoothScrolling();
-        initializeMovieAnimations();
-        initializeSearchForm();
-        initializeContactForm();
-        initializeImageLoading();
-        initializeLandingPage();
+// Utility function for debouncing
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Make functions available globally for debugging
+window.movieApp = {
+    refresh: function() {
+        location.reload();
+    },
+    testMenu: function() {
+        const menuToggle = document.getElementById('menu-toggle');
+        if (menuToggle) menuToggle.click();
+    },
+    testScroll: function() {
+        const scrollBtn = document.getElementById('scrollTopBtn');
+        if (scrollBtn) scrollBtn.click();
     }
-});
+};
+
+console.log('Movie Finding Made Easy - JavaScript loaded successfully');

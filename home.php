@@ -1,4 +1,9 @@
 <?php
+// Enable full error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
 session_start();
 
 // Check if coming from landing page
@@ -22,12 +27,18 @@ $jsonFile = 'movies.json';
 if (file_exists($jsonFile)) {
     $jsonData = file_get_contents($jsonFile);
     $movies = json_decode($jsonData, true);
+    
+    // Check if JSON decoding was successful
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        error_log('JSON decode error: ' . json_last_error_msg());
+        $movies = [];
+    }
 }
 
 $searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
 $filteredMovies = $movies;
 
-if (!empty($searchQuery)) {
+if (!empty($searchQuery) && !empty($movies)) {
     $filteredMovies = array_filter($movies, function($movie) use ($searchQuery) {
         return stripos($movie['title'], $searchQuery) !== false;
     });
