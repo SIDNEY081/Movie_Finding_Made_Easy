@@ -332,6 +332,7 @@ function initializeImageLoading() {
 
         images.forEach(img => imageObserver.observe(img));
     }
+                                    🗑️ Delete
 
     // Handle broken images
     images.forEach(img => {
@@ -476,4 +477,50 @@ function initializeLandingPage() {
 // Initialize landing page if we're on that page
 document.addEventListener('DOMContentLoaded', function() {
     initializeLandingPage();
+});
+
+// ===== ADMIN DASHBOARD FUNCTIONALITY =====
+function initializeAdminDashboard() {
+    // Toggle edit forms
+    const toggleEditButtons = document.querySelectorAll('.toggle-edit');
+    if (toggleEditButtons.length > 0) {
+        toggleEditButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const editForm = document.getElementById(targetId);
+                if (editForm.style.display === 'none') {
+                    editForm.style.display = 'block';
+                } else {
+                    editForm.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    // Auto-close success message after 5 seconds
+    const successMessage = document.querySelector('.success-message');
+    if (successMessage) {
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 5000);
+    }
+}
+
+// Initialize admin dashboard if we're on that page
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on admin dashboard by looking for admin-header
+    const adminHeader = document.querySelector('.admin-header');
+    if (adminHeader) {
+        initializeAdminDashboard();
+    } else {
+        // Run regular site initializations
+        initializeMobileMenu();
+        initializeScrollToTop();
+        initializeSmoothScrolling();
+        initializeMovieAnimations();
+        initializeSearchForm();
+        initializeContactForm();
+        initializeImageLoading();
+        initializeLandingPage();
+    }
 });

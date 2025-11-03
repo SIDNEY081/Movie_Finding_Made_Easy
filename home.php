@@ -1,4 +1,21 @@
 <?php
+session_start();
+
+// Check if coming from landing page
+if (isset($_GET['from_landing']) && $_GET['from_landing'] == 1) {
+    $_SESSION['landing_seen'] = true;
+}
+
+// If haven't seen landing page, redirect to landing
+if (!isset($_SESSION['landing_seen'])) {
+    header('Location: index.html');
+    exit;
+}
+
+// Check if admin is logged in (to bypass landing in future)
+$isAdmin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'];
+
+// The rest of your existing index.php code continues below...
 $movies = [];
 $jsonFile = 'movies.json';
 
@@ -42,15 +59,20 @@ if ($hour < 12) {
   
   <!-- Header -->
   <header>
-    <a href="index.php">
+    <a href="home.php">
       <img src="images/logo.png" alt="Site Logo" class="logo" />
     </a>
     <button id="menu-toggle" aria-label="Toggle navigation">☰</button>
     <nav>
       <ul class="nav-menu">
-        <li><a href="index.php" class="active">Home</a></li>
+        <li><a href="home.php" class="active">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.php">Contact</a></li>
+        <?php if ($isAdmin): ?>
+          <li><a href="admin-dashboard.php" class="admin-nav-link">Admin Dashboard</a></li>
+        <?php else: ?>
+          <li><a href="admin-login.php" class="admin-nav-link">Admin Login</a></li>
+        <?php endif; ?>
       </ul>
     </nav>
   </header>
@@ -95,7 +117,7 @@ if ($hour < 12) {
             <?php if (!empty($searchQuery)): ?>
               <div class="no-results">
                 <p>No movies found matching "<?php echo htmlspecialchars($searchQuery); ?>".</p>
-                <a href="index.php" class="btn-primary">View All Movies</a>
+                <a href="home.php" class="btn-primary">View All Movies</a>
               </div>
             <?php else: ?>
               <div class="no-results">
@@ -119,9 +141,10 @@ if ($hour < 12) {
         <div class="footer-section">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="index.php">Home</a></li>
+            <li><a href="home.php">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.php">Contact</a></li>
+            <li><a href="admin-login.php">Admin</a></li>
           </ul>
         </div>
         <div class="footer-section">
@@ -132,16 +155,11 @@ if ($hour < 12) {
         </div>
         <div class="footer-section">
           <h4>Follow Us</h4>
-
           <div class="social-links" aria-label="Social links">
-
-
-        <a href="https://facebook.com" target="_blank" rel="https://facebook.com">Facebook</a> |
-        <a href="https://twitter.com" target="_blank" rel="https://twitter.com">Twitter</a> |
-        <a href="https://github.com" target="_blank" rel="https://github.com/SIDNEY081/Movie_Finding_Made_Easy">GitHub</a>
-      
-
-      </div>
+            <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a> |
+            <a href="https://twitter.com" target="_blank" rel="noopener">Twitter</a> |
+            <a href="https://github.com/SIDNEY081/Movie_Finding_Made_Easy" target="_blank" rel="noopener">GitHub</a>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
@@ -158,8 +176,6 @@ if ($hour < 12) {
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="js/script.js"></script>
   <script>
-
-
     // Initialize AOS animations
     AOS.init({
       duration: 800,

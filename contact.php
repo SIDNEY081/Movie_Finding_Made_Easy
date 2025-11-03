@@ -200,10 +200,10 @@ if ($hour < 12) {
         <div class="footer-section">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="index.php">Home</a></li>
+            <li><a href="home.php">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.php">Contact</a></li>
-          </ul>
+          </ul>.
         </div>
         <div class="footer-section">
           <h4>Contact Info</h4>
