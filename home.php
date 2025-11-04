@@ -1,5 +1,3 @@
-[file name]: home.php
-[file content begin]
 <?php
 // Enable full error reporting
 error_reporting(E_ALL);
@@ -21,6 +19,18 @@ if (!isset($_SESSION['landing_seen'])) {
 
 // Check if admin is logged in (to bypass landing in future)
 $isAdmin = isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'];
+
+// IP RESTRICTION - List of allowed IPs that can see admin links
+$allowed_ips = [
+    '102.64.40.141',    // 
+    
+];
+
+// Get user's IP address
+$user_ip = $_SERVER['REMOTE_ADDR'];
+
+// Check if user's IP is allowed to see admin links
+$isAllowedIP = in_array($user_ip, $allowed_ips);
 
 // Movie data 
 $movies = [];
@@ -71,25 +81,22 @@ if ((!empty($searchQuery) || !empty($selectedGenre)) && !empty($movies)) {
     });
 }
 
-// Dynamic greeting message
-$hour = date('H');
-$greetings = [
-    12 => 'morning',
-    18 => 'afternoon',
-    24 => 'evening'
-    
-];
+// Set correct timezone
+date_default_timezone_set('Africa/Johannesburg');
 
-// Find the first time block that $hour is LESS than, and get its greeting
-$time_of_day = 'evening'; // Default
-foreach ($greetings as $limit => $g) {
-    if ($hour < $limit) {
-        $time_of_day = $g;
-        break;
-    }
+$hour = date('H');
+
+if ($hour < 12) {
+    $time_of_day = 'morning';
+} elseif ($hour < 18) {
+    $time_of_day = 'afternoon';
+} else {
+    $time_of_day = 'evening';
 }
 
 $greeting = "Good $time_of_day, welcome to Movie Finding Made Easy!";
+
+
 
 ?>
 <!DOCTYPE html>
@@ -119,7 +126,7 @@ $greeting = "Good $time_of_day, welcome to Movie Finding Made Easy!";
         <li><a href="contact.php">Contact</a></li>
         <?php if ($isAdmin): ?>
           <li><a href="admin-dashboard.php" class="admin-nav-link">Admin Dashboard</a></li>
-        <?php else: ?>
+        <?php elseif ($isAllowedIP): ?>
           <li><a href="admin-login.php" class="admin-nav-link">Admin Login</a></li>
         <?php endif; ?>
       </ul>
@@ -229,7 +236,9 @@ $greeting = "Good $time_of_day, welcome to Movie Finding Made Easy!";
             <li><a href="home.php">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.php">Contact</a></li>
-            <li><a href="admin-login.php">Admin</a></li>
+            <?php if ($isAllowedIP): ?>
+              <li><a href="admin-login.php">Admin</a></li>
+            <?php endif; ?>
           </ul>
         </div>
         <div class="footer-section">
