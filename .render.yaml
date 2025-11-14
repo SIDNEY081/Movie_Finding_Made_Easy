@@ -1,11 +1,13 @@
-# .render.yaml
+# Render deployment configuration for Movie_Finding_Made_Easy
+
 services:
   - type: web
     name: Movie_Finding_Made_Easy
     env: php
-    region: oregon         
+    region: oregon   
     branch: main
-    rootDir:           
-    buildCommand: 
-    startCommand: "php -S 0.0.0.0:$PORT -t ."
-    phpVersion: "8.1"      # pick 8.0 or 8.1
+    rootDir: .                  
+    buildCommand: ""           
+    startCommand: "php -S 0.0.0.0:$PORT router.php"
+    phpVersion: "8.1"           
+    autoDeploy: true            # automatically deploy on each push
