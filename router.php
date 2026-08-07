@@ -7,4 +7,4 @@ if (php_sapi_name() == 'cli-server') {
         return false; // serve static file directly
     }
 }
-require_once __DIR__ . '/index.php';
+require_once __DIR__ . '/index.html';

@@ -6,9 +6,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     
-    //  authentication 
-    $admin_username = 'admin';
-    $admin_password = 'password123'; 
+    // Credentials come from environment variables (set in Render dashboard).
+    // Falls back to the old defaults only for local development.
+    $admin_username = getenv('ADMIN_USERNAME') ?: 'admin';
+    $admin_password = getenv('ADMIN_PASSWORD') ?: 'password123';
     
     if ($username === $admin_username && $password === $admin_password) {
         $_SESSION['admin_logged_in'] = true;
