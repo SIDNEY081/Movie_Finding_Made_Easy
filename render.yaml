@@ -9,7 +9,6 @@ services:
     rootDir: .                  
     buildCommand: ""           
     startCommand: "php -S 0.0.0.0:$PORT router.php"
-    phpVersion: "8.1"
     autoDeploy: true            # automatically deploy on each push
     envVars:
       - key: ADMIN_USERNAME
