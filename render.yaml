@@ -3,12 +3,10 @@
 services:
   - type: web
     name: Movie_Finding_Made_Easy
-    env: php
-    region: oregon   
+    runtime: docker
+    region: oregon
     branch: main
-    rootDir: .                  
-    buildCommand: ""           
-    startCommand: "php -S 0.0.0.0:$PORT router.php"
+    rootDir: .
     autoDeploy: true            # automatically deploy on each push
     envVars:
       - key: ADMIN_USERNAME
